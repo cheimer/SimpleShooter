@@ -35,6 +35,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Particle")
 	float MaxRange = 1000.0f;
 
+	UPROPERTY(EditAnywhere, Category = "Particle")
+	float Damage = 10.0f;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 	TEnumAsByte<ECollisionChannel> BulletCollisionChannel;
 };

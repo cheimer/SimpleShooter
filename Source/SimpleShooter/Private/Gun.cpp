@@ -5,6 +5,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Particles/ParticleSystem.h"
 #include "Kismet/GameplayStatics.h"
+#include "Engine/DamageEvents.h"
 
 
 AGun::AGun()
@@ -46,6 +47,11 @@ void AGun::PullTrigger()
 		{
 			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitFlash, HitInfo.Location, (-ViewPointRot.Vector()).Rotation(), true);
 		}
+
+		if (!HitInfo.GetActor()) return;
+
+		FPointDamageEvent DamageEvent(Damage, HitInfo, ViewPointRot.Vector(), nullptr);
+		HitInfo.GetActor()->TakeDamage(Damage, DamageEvent, OwnerController, this);
 	}
 
 }
@@ -53,5 +59,6 @@ void AGun::PullTrigger()
 void AGun::BeginPlay()
 {
 	Super::BeginPlay();
+
 	
 }

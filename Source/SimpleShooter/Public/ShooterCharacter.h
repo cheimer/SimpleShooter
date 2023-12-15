@@ -18,6 +18,10 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+
+	void Shoot();
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -35,10 +39,18 @@ private:
 	void LookUpRate(float Value);
 	void LookRightRate(float Value);
 	void ShooterJump();
-	void Shoot();
+
+	UFUNCTION(BlueprintPure)
+	bool IsDead() const { return FMath::IsNearlyZero(Health); }
 
 	UPROPERTY(EditAnywhere)
 	float RotationRate = 60.0f;
+
+	UPROPERTY(EditAnywhere)
+	float MaxHealth = 100.0f;
+
+	UPROPERTY(EditAnywhere)
+	float Health;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Gun")
 	TSubclassOf<class AGun> GunClass;
