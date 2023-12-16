@@ -16,6 +16,7 @@ class SIMPLESHOOTER_API AShooterAIController : public AAIController
 
 public:
 	virtual void Tick(float DeltaTime) override;
+	bool IsDead();
 
 protected:
 	virtual void BeginPlay() override;

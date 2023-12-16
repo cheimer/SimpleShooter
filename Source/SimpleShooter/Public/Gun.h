@@ -20,6 +20,10 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	bool GunTrace(FHitResult& OutHit, FVector& ShotDirection);
+
+	AController* GetOwnerController();
+
 	UPROPERTY(VisibleAnywhere, Category = "Component")
 	USceneComponent* GunRootComponent;
 
@@ -37,6 +41,12 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Particle")
 	float Damage = 10.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Sound")
+	class USoundBase* MuzzleSound;
+
+	UPROPERTY(EditAnywhere, Category = "Sound")
+	class USoundBase* HitSound;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 	TEnumAsByte<ECollisionChannel> BulletCollisionChannel;

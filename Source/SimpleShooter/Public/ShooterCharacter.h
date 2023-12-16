@@ -22,6 +22,12 @@ public:
 
 	void Shoot();
 
+	UFUNCTION(BlueprintPure)
+	bool IsDead() const { return FMath::IsNearlyZero(Health); }
+
+	UFUNCTION(BlueprintPure)
+	float GetHealthPercent() const { return Health / MaxHealth; }
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -39,9 +45,6 @@ private:
 	void LookUpRate(float Value);
 	void LookRightRate(float Value);
 	void ShooterJump();
-
-	UFUNCTION(BlueprintPure)
-	bool IsDead() const { return FMath::IsNearlyZero(Health); }
 
 	UPROPERTY(EditAnywhere)
 	float RotationRate = 60.0f;
